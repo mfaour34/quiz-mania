@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/mfaour34/quiz-mania#readme",
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
     "bcrypt": "^5.0.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
@@ -42,6 +43,8 @@
     "typescript": "^4.6.3"
   },
   "_moduleAliases": {
-    "@shared": "dist/modules/shared"
+    "@shared": "dist/modules/shared",
+    "@user": "dist/modules/user",
+    "@quiz": "dist/modules/quiz"
   }
 }
