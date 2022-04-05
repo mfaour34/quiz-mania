@@ -1,0 +1,47 @@
+{
+  "name": "quiz-mania",
+  "description": "A small API for a quiz app where users can create and attempt quizzes. The users should also be able to see some basic stats about their quiz attempts.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "lint": "eslint . --ext .ts --max-warnings 0",
+    "lint:fix": "yarn lint --fix",
+    "lint:strict": "yarn tsc --noEmit && yarn lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfaour34/quiz-mania.git"
+  },
+  "author": "Mohammed Faour",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mfaour34/quiz-mania/issues"
+  },
+  "homepage": "https://github.com/mfaour34/quiz-mania#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "glob": "^7.2.0",
+    "helmet": "^5.0.2",
+    "module-alias": "^2.2.2",
+    "mongoose": "^6.2.10",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
+    "concurrently": "^7.1.0",
+    "eslint": "^8.12.0",
+    "typescript": "^4.6.3"
+  },
+  "_moduleAliases": {
+    "@shared": "dist/modules/shared"
+  }
+}
