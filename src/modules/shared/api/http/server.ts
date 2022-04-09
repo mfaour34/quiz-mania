@@ -1,11 +1,12 @@
 import { once } from 'events'
 import * as http from 'http'
-import express from 'express'
+import express, { Application, NextFunction, Request, Response } from 'express'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
 import { env } from 'process'
 import morgan from 'morgan'
 import { AccessTokensProvider } from '@shared/types/AccessTokensProvider'
+import { applyUsersRoutes } from '@user/api/usersRoutes'
 dotenv.config()
 
 const HTTP_PORT = parseInt(env.HTTP_PORT as string)
@@ -19,6 +20,8 @@ export const startHttpServer = async (accessTokensProvider: AccessTokensProvider
   } else {
     app = createApp(undefined)
   }
+
+  applySystemRoutes(app)
 
   server = app.listen(HTTP_PORT)
 
@@ -46,7 +49,12 @@ export function createApp(_accessTokensProvider: AccessTokensProvider | undefine
   return app
 }
 
-const errorHandler: express.ErrorRequestHandler = (error, _req, res) => {
+function applySystemRoutes(app: Application) {
+  applyUsersRoutes(app)
+}
+
+// eslint-disable-next-line no-unused-vars
+const errorHandler: express.ErrorRequestHandler = (error, _req: Request, res: Response, _next: NextFunction) => {
   // here we keep mapping of application errors (4XX group in fact)
   // to REST HTTP errors;
   // it will be organized and extended in the future
@@ -62,7 +70,6 @@ const errorHandler: express.ErrorRequestHandler = (error, _req, res) => {
       } as Error,
     })
   } else {
-    reportError(error)
     console.error(error)
     res.status(500).json({ error: { message: 'Internal server error' } })
   }
