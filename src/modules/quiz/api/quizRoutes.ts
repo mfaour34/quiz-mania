@@ -2,7 +2,7 @@ import { Application } from 'express'
 import { QuizController } from './quizController'
 
 export const applyQuizRoutes = (app: Application): void => {
-  const userController = new QuizController()
-  app.post('/quiz', userController.create)
-  app.get('/quiz', userController.list)
+  const quizController = new QuizController()
+  app.post('/quiz', quizController.create)
+  app.get('/quiz', quizController.list)
 }
