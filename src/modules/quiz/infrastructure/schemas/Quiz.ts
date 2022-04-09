@@ -10,6 +10,7 @@ const questionSchema = new Schema<IQuestion>({
 
 const quizSchema = new Schema<IQuiz>({
   questions: { type: [questionSchema], required: true },
+  userId: { type: Schema.Types.ObjectId, required: true },
 })
 
 export const Quiz = model<IQuiz>('Quiz', quizSchema)

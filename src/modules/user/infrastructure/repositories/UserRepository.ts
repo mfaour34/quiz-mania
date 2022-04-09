@@ -29,7 +29,7 @@ export class UserRepository implements IUserRepository {
     }
   }
 
-  public applyFilters(request: IListFilters) {
+  private applyFilters(request: IListFilters) {
     if (request?.ids) {
       return { _id: { $in: request?.ids } }
     }
