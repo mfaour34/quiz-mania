@@ -24,6 +24,7 @@ export class QuizRepository implements IQuizRepository {
   }
 
   private applyFilters(filters: IFilterQuizes) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const body: any = {}
     if (filters?.ids) {
       body['_id'] = { $in: filters?.ids }
@@ -32,6 +33,6 @@ export class QuizRepository implements IQuizRepository {
       body['userId'] = { $in: filters?.userIds }
     }
 
-    return {}
+    return body
   }
 }

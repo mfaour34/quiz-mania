@@ -44,6 +44,7 @@ export class QuizController {
     }
   }
   private getAttributesFromQuery(request: Request) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const body: any = {}
     if (request.query?.id) {
       body['ids'] = request.query.id as string[]
