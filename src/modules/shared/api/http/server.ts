@@ -7,21 +7,15 @@ import { env } from 'process'
 import morgan from 'morgan'
 import { AccessTokensProvider } from '@shared/types/AccessTokensProvider'
 import { applyUsersRoutes } from '@user/api/usersRoutes'
+import { getAccessTokenCheckerMiddleware } from '../middleware/accessTokenCheckerMiddleware'
 dotenv.config()
 
 const HTTP_PORT = parseInt(env.HTTP_PORT as string)
 
 let server: http.Server
 
-export const startHttpServer = async (accessTokensProvider: AccessTokensProvider | undefined): Promise<http.Server> => {
-  let app
-  if (accessTokensProvider) {
-    app = createApp(accessTokensProvider)
-  } else {
-    app = createApp(undefined)
-  }
-
-  applySystemRoutes(app)
+export const startHttpServer = async (accessTokensProvider: AccessTokensProvider): Promise<http.Server> => {
+  const app = createApp(accessTokensProvider)
 
   server = app.listen(HTTP_PORT)
 
@@ -34,7 +28,7 @@ export const startHttpServer = async (accessTokensProvider: AccessTokensProvider
 }
 
 // eslint-disable-next-line no-unused-vars
-export function createApp(_accessTokensProvider: AccessTokensProvider | undefined): express.Express {
+export function createApp(accessTokensProvider: AccessTokensProvider): express.Express {
   const app = express()
   app.disable('x-powered-by')
 
@@ -43,6 +37,10 @@ export function createApp(_accessTokensProvider: AccessTokensProvider | undefine
   // HTTP body size can be configured flexibly on ingress controller level,
   // here define just the upper limit
   app.use(express.json({ limit: '10mb' }))
+
+  app.use(getAccessTokenCheckerMiddleware(accessTokensProvider))
+
+  applySystemRoutes(app)
 
   app.use(errorHandler)
 

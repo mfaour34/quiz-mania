@@ -1,7 +1,7 @@
 import './sideEffectImports'
 import { startHttpServer } from '@shared/api/http'
 import { mongoConnect } from '@shared/infrastructure/mongo/mongoConnect'
-// import { AccessTokensProvider } from '@shared/types/AccessTokensProvider'
+import { accessTokensProvider } from '@shared/utils/accessTokensProvider'
 
 startApp().catch(error => {
   console.log(error)
@@ -11,5 +11,5 @@ startApp().catch(error => {
 async function startApp() {
   mongoConnect()
 
-  await startHttpServer(undefined)
+  await startHttpServer(accessTokensProvider)
 }
