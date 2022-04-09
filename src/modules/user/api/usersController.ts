@@ -3,6 +3,7 @@ import { UserRepository } from '@user/infrastructure/repositories/UserRepository
 import { handleHttpError } from '@shared/utils/handleHttpError'
 import _ from 'lodash'
 import { ICreateUser } from '@user/application/entities/IUser'
+import { validateRequired } from '@shared/utils/validateRequired'
 
 export class UsersController {
   constructor() {
@@ -27,8 +28,8 @@ export class UsersController {
   public async create(req: Request, res: Response) {
     const userRepo = new UserRepository()
     try {
-      const body = this.getBodyAttributes(req)
-      const request = await userRepo.create(body)
+      const body = validateRequired(req.body, ['username', 'email', 'password'])
+      const request = await userRepo.create(body as ICreateUser)
       res.status(200).json(request)
     } catch (error) {
       handleHttpError(res, error)
@@ -40,24 +41,5 @@ export class UsersController {
       return request.query.id as string[]
     }
     return undefined
-  }
-
-  private getBodyAttributes(request: Request) {
-    const body: ICreateUser = {
-      username: '',
-      email: '',
-      password: '',
-    }
-    if (request.body?.username) {
-      body.username = request.body.username
-    }
-    if (request.body?.email) {
-      body.email = request.body.email
-    }
-    if (request.body?.password) {
-      body.password = request.body.password
-    }
-
-    return body
   }
 }

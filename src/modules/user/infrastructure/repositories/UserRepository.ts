@@ -6,9 +6,6 @@ import { User } from '@user/infrastructure/schemas/User'
 export class UserRepository implements IUserRepository {
   public async create(attrs: ICreateUser): Promise<IUser | undefined> {
     try {
-      if (!attrs.username.length || !attrs.email.length || !attrs.username.length) {
-        throw 'body missing required fields'
-      }
       const hashedPass = await genHash(attrs.password)
       const userCreated = await User.create({
         ...attrs,
