@@ -5,6 +5,9 @@ clone repo and create a .env file, in which you will have to add the following
  - HTTP_PORT=<your_http_port>
  - API_ACCESS_TOKENS=<access_token> (note that to add several access token, seperate by comma)
 
+## API Documentation
+ - this is the [postman documentation](https://documenter.getpostman.com/view/13953495/UVyxRZP6#auth-info-5172ff7a-e587-4db7-a843-c522d4fcde07) for the API
+
 ## Basics
 The challenge is to create a small API for a quiz app where users can create and attempt quizzes. The users should also be able to see some basic stats about their quiz attempts.
 
