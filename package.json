@@ -48,6 +48,7 @@
   "_moduleAliases": {
     "@shared": "dist/modules/shared",
     "@user": "dist/modules/user",
-    "@quiz": "dist/modules/quiz"
+    "@quiz": "dist/modules/quiz",
+    "@attempt": "dist/modules/attempt"
   }
 }

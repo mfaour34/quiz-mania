@@ -1,4 +1,4 @@
-import { IAnswer, IAttempt } from '@quiz/application/entities/IAttempt'
+import { IAnswer, IAttempt } from '@attempt/application/entities/IAttempt'
 import { Schema, model } from 'mongoose'
 
 const wrongAnswersSchema = new Schema<IAnswer>({
