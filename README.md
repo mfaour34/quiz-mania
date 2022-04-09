@@ -1,5 +1,10 @@
 # Quiz challenge absence.io GmbH
 
+## To run and accept http requests
+clone repo and create a .env file, in which you will have to add the following
+ - HTTP_PORT=<your_http_port>
+ - API_ACCESS_TOKENS=<access_token> (note that to tadd several access token, seperate by comma)
+
 ## Basics
 The challenge is to create a small API for a quiz app where users can create and attempt quizzes. The users should also be able to see some basic stats about their quiz attempts.
 
