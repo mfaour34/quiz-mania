@@ -11,13 +11,19 @@ export interface ICreateAttempt {
   wrongAnswers: IAnswer[]
 }
 
+export interface IUserAttempt {
+  userId: Types.ObjectId
+  quizId: Types.ObjectId
+  answers: IAnswer[]
+}
+
 export interface IAnswer {
   qid: string
-  answer: string
+  answerIndex: number
 }
 
 export interface IAttemptFilters {
   ids?: string[]
   userIds?: string[]
-  questionIds?: string[]
+  quizIds?: string[]
 }

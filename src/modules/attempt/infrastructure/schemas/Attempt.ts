@@ -2,7 +2,7 @@ import { IAnswer, IAttempt } from '@attempt/application/entities/IAttempt'
 import { Schema, model } from 'mongoose'
 
 const wrongAnswersSchema = new Schema<IAnswer>({
-  answer: String,
+  answerIndex: Number,
   qid: String,
 })
 
