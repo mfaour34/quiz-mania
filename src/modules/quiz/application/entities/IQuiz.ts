@@ -16,6 +16,17 @@ export interface IQuestion {
   answerIndex: number
 }
 
+export interface IStatResponse {
+  numberOfAttempts: number
+  completion: number
+  scores: IUserScore[]
+}
+
+export interface IUserScore {
+  userId: Types.ObjectId
+  score: number
+}
+
 export interface IFilterQuizes {
   ids?: string[]
   userIds?: string[]

@@ -39,10 +39,21 @@ export class QuizController {
       const request = await quizRepo.list(filters)
       res.status(200).json(request)
     } catch (error) {
-      console.error(error)
-      return undefined
+      handleHttpError(res, error)
     }
   }
+
+  public async getStats(req: Request, res: Response) {
+    const quizRepo = new QuizRepository()
+    try {
+      const validateQuery = validateRequired(req.query, ['quizId', 'userId'])
+      const request = await quizRepo.stats(validateQuery.quizId, validateQuery.userId)
+      res.status(200).json(request)
+    } catch (error) {
+      handleHttpError(res, error)
+    }
+  }
+
   private getAttributesFromQuery(request: Request) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const body: any = {}
